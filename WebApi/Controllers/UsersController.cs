@@ -30,15 +30,53 @@ namespace WebApi.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<IActionResult> Create(User user)
+        {
+            //_context.SYS_Users.FromSqlRaw("SET IDENTITY_INSERT [dbo].[SYS_Users] ON");
+
+            
+            await _context.SYS_Users.AddAsync(new User()
+            {
+                UserID = user.UserID,
+                fullname = user.fullname,
+                username = user.username,
+                password = user.password,
+                email = user.email,
+                MenuID = user.MenuID,
+                IsActive = user.IsActive,
+            });
+
+            await _context.SaveChangesAsync();
+            
+            //_context.SYS_Users.FromSqlRaw("SET IDENTITY_INSERT [dbo].[SYS_Users] OFF");
+
+            return Ok();
+        }
+
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateUser(int id, User user)
         {
             if (id != user.UserID) return BadRequest();
 
-            user.IsActive = true;
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userToDelete = await _context.SYS_Users.FindAsync(id);
+            if (userToDelete == null) return NotFound();
+            
+            _context.SYS_Users.Remove(userToDelete);
+            await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }
