@@ -11,9 +11,10 @@
 
         public string NodeDescription1 { get; set; }
         public string NodeDescription2 { get; set; }
+        public string? CRReportName { get; set; }
 
         //public string IconImage { get; set; }
-        public string FileName { get; set; }
+        public string? FileName { get; set; }
 
     }
 }

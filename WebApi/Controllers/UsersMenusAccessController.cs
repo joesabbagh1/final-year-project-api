@@ -16,20 +16,6 @@ namespace WebApi.Controllers
             _context = context;
         }
 
-        //SELECT DISTINCT MN1.Description mnDescription1
-        //      , MN2.Description mnDescription2
-        //      , MN3.Description mnDescription3
-        //      , NOD.NodeID
-        //      ,NOD.NodeDescription1 nodeDescription,
-
-        //FROM SYS_MenuAccess       as ACC WITH(NOLOCK)
-        //JOIN SYS_Nodes            as NOD WITH(NOLOCK)
-        //        ON ACC.NodeID = NOD.NodeID
-        //LEFT JOIN SYS_VariableDetails as MN1 ON            NOD.MainNodeID1      = MN1.SubVariableCode  AND MN1.VariableCode = 'MN01'
-        //LEFT JOIN     SYS_VariableDetails as MN2 ON            NOD.MainNodeID2      = MN2.SubVariableCode  AND MN2.VariableCode = 'MN02'
-        //LEFT JOIN     SYS_VariableDetails as MN3 ON            NOD.MainNodeID3      = MN3.SubVariableCode  AND MN3.VariableCode = 'MN03'
-        //WHERE ACC.MenuID    = 1      AND ACC.CompNo       = '60'
-
         [HttpGet("{menuId}/{compNo}")]
         [ProducesResponseType(typeof(UserAccess), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
