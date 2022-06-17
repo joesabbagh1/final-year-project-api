@@ -15,6 +15,21 @@ namespace WebApi.Controllers
         {
             _context = context;
         }
+        [HttpGet("main")]
+        public async Task<IActionResult> getMain()
+        {
+            var menus = (
+                from varDet in _context.SYS_VariableDetails
+                where varDet.VariableCode == "MM01"
+                select new
+                {
+                    varDet.SubVariableCode,
+                    varDet.Description,
+                    varDet.Alt_Description
+                }
+                ).ToList();
+            return menus == null ? NotFound() : Ok(menus);
+        }
 
         [HttpGet("{menuId}/{compNo}")]
         [ProducesResponseType(typeof(UserAccess), StatusCodes.Status200OK)]
