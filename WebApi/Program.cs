@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<FattalDbContext>(
     o => o.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))
+
     );
 
 //services cors

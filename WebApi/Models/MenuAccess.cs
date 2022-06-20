@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApi.Models
 {
     [Keyless]
-    public class MenuAccess
+    public record MenuAccess
     {
         public string NodeID { get; set; }
         public int MenuID { get; set; }

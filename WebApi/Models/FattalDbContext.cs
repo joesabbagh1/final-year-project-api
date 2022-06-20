@@ -12,5 +12,6 @@ namespace WebApi.Models
         public DbSet<UserAccess> SYS_UsersAccess { get; set; }
         public DbSet<MenuAccess> SYS_MenuAccess { get; set; }
         public DbSet<Node> SYS_Nodes { get; set; }
+        public DbSet<SalesRep> SalesReps { get; set; }
     }
 }
