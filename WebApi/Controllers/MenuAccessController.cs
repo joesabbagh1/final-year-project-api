@@ -31,7 +31,7 @@ namespace WebApi.Controllers
                 on new { a = NOD.NodeID, b = compNo, c = subVariableCode } equals new { a = MenuAcc.NodeID, b = MenuAcc.CompNo, c = MenuAcc.MenuID }
                 into a
                 from b in a.DefaultIfEmpty()
-                select b.NodeID
+                select b.NodeID 
                 ).ToList();
 
             return access == null ? NotFound() : Ok(access);
@@ -40,17 +40,17 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(MenuAccess menuAccess)
         {
+            //await _context.SYS_MenuAccess.AddAsync(menuAccess);
             await _context.SYS_MenuAccess.AddAsync(menuAccess);
-
             await _context.SaveChangesAsync();
 
             return Ok();
         }
 
-        [HttpDelete()]
-        public async Task<IActionResult> Delete(MenuAccess menuAccess)
+        [HttpDelete("{NodeID}/{MenuID}/{CompNo}")]
+        public async Task<IActionResult> Delete(string NodeID, int MenuID, int CompNo)
         {
-            var menuAccessToDelete = await _context.SYS_MenuAccess.FindAsync(menuAccess);
+            var menuAccessToDelete = await _context.SYS_MenuAccess.FindAsync(NodeID, MenuID, CompNo);
             if (menuAccessToDelete == null) return NotFound();
 
             _context.SYS_MenuAccess.Remove(menuAccessToDelete);

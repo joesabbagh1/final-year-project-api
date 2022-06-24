@@ -33,7 +33,13 @@ namespace WebApi.Controllers
                 new { f1 = p.AccessVariable1, f2 = "CO01" } equals new { f1 = pm.SubVariableCode, f2 = pm.VariableCode }
                 where p.AccessType == "UA0000"
                 where p.UserId == id
-                select pm).ToList();
+                select new
+                {
+                    variableCode = pm.VariableCode,
+                    compNo = pm.SubVariableCode,
+                    description = pm.Description,
+                    alt_description = pm.Alt_Description
+                }).ToList();
 
             return companies == null ? NotFound() : Ok(companies);
         }

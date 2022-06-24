@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Models
 {
-    [Keyless]
     public record MenuAccess
     {
         public string NodeID { get; set; }
