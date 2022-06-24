@@ -14,11 +14,16 @@ namespace WebApi.Models
                 u.MenuID,
                 u.CompNo
             });
-            //modelBuilder.Entity<MenuAccess>()
-            //    .HasOne(u => u.node)
-            //    .WithMany(u => u.Men)
-                //.HasForeignKey(u => u.NodeID);
+
+            modelBuilder.Entity<UserAccess>().HasKey(u => new
+            {
+                u.UserID,
+                u.AccessType,
+                u.AccessVariable1,
+                u.CompNo
+            });
         }
+
         public DbSet<User> SYS_Users { get; set; }
         public DbSet<VariableDetails> SYS_VariableDetails { get; set; }
         public DbSet<UserAccess> SYS_UsersAccess { get; set; }

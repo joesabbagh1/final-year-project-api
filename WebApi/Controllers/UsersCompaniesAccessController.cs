@@ -32,7 +32,7 @@ namespace WebApi.Controllers
                 join pm in _context.SYS_VariableDetails on
                 new { f1 = p.AccessVariable1, f2 = "CO01" } equals new { f1 = pm.SubVariableCode, f2 = pm.VariableCode }
                 where p.AccessType == "UA0000"
-                where p.UserId == id
+                where p.UserID == id
                 select new
                 {
                     variableCode = pm.VariableCode,
