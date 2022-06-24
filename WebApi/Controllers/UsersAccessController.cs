@@ -23,8 +23,19 @@ namespace WebApi.Controllers
 
         }
 
+        [HttpGet("{accessType}")]
+        public async Task<IActionResult> getAccessType(string accessType)
+        {
+            var usersAccess = (
+                from userAccess in _context.SYS_UsersAccess
+                where userAccess.AccessType == accessType
+                select userAccess
+                ).ToList();
+            return usersAccess == null ? NotFound() : Ok(usersAccess);
+        }
+
         [HttpGet("{accessType}/{accessVariable}")]
-        public async Task<IActionResult> getAccess(string accessType, string accessVariable)
+        public async Task<IActionResult> getAccessVariables(string accessType, string accessVariable)
         {
             var usersAccess = (
                 from userAccess in _context.SYS_UsersAccess
