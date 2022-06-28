@@ -71,5 +71,18 @@ namespace WebApi.Controllers
             return nodes == null ? NotFound() : Ok(nodes);
         }
 
+        [HttpGet("{company}/{code}")]
+        public async Task<IActionResult> GetDetails(int company, string code)
+        {
+            var details = (
+                from varDetails in _context.SYS_VariableDetails
+                where varDetails.VariableCode == code
+                where varDetails.CompNo == company
+                select varDetails
+                ).ToList();
+
+            return details == null ? NotFound() : Ok(details);
+        }
+
     }
 }

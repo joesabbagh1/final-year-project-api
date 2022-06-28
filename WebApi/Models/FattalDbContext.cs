@@ -22,10 +22,17 @@ namespace WebApi.Models
                 u.AccessVariable1,
                 u.CompNo
             });
+
+            modelBuilder.Entity<VariableHeaders>().HasKey(u => new
+            {
+                u.CompNo,
+                u.VariableCode,
+            });
         }
 
         public DbSet<User> SYS_Users { get; set; }
         public DbSet<VariableDetails> SYS_VariableDetails { get; set; }
+        public DbSet<VariableHeaders> SYS_VariableHeaders { get; set; }
         public DbSet<UserAccess> SYS_UsersAccess { get; set; }
         public DbSet<MenuAccess> SYS_MenuAccess { get; set; }
         public DbSet<Node> SYS_Nodes { get; set; }
