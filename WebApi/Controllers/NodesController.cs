@@ -47,6 +47,7 @@ namespace WebApi.Controllers
                new { c1 = NOD.MainNodeID5.ToString(), c2 = "MN05" } equals new { c1 = MN5.SubVariableCode, c2 = MN5.VariableCode }
                into e
                from MN5 in e.DefaultIfEmpty()
+               where NOD.Status == 1
                select new
                {
                    nodeID = NOD.NodeID,

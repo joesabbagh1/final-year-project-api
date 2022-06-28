@@ -61,6 +61,7 @@ namespace WebApi.Controllers
                 from MN5 in e.DefaultIfEmpty()
                 where ACC.MenuID == menuId
                 where ACC.CompNo == compNo
+                where NOD.Status == 1
                 //select MN1
                 select new
                 {
