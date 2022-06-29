@@ -33,30 +33,30 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        //[HttpPut("{id}")]
-        //[ProducesResponseType(typeof(User), StatusCodes.Status204NoContent)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> Update(int id, User user)
-        //{
-        //    if (id != user.UserID) return BadRequest();
+        [HttpPut("{compNo}/{variableCode}/{subVariableCode}")]
+        [ProducesResponseType(typeof(User), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Update(int compNo, string variableCode, string subVariableCode, VariableDetails variable)
+        {
+            if (compNo != variable.CompNo && variableCode != variable.VariableCode && subVariableCode != variable.SubVariableCode) return BadRequest();
 
-        //    _context.Entry(user).State = EntityState.Modified;
-        //    await _context.SaveChangesAsync();
+            _context.Entry(variable).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var userToDelete = await _context.SYS_Users.FindAsync(id);
-        //    if (userToDelete == null) return NotFound();
+        [HttpDelete("{compNo}/{variableCode}/{subVariableCode}")]
+        public async Task<IActionResult> Delete(int compNo, string variableCode, string subVariableCode)
+        {
+            var variableToDelete = await _context.SYS_VariableDetails.FindAsync(compNo, variableCode, subVariableCode);
+            if (variableToDelete == null) return NotFound();
 
-        //    _context.SYS_Users.Remove(userToDelete);
-        //    await _context.SaveChangesAsync();
+            _context.SYS_VariableDetails.Remove(variableToDelete);
+            await _context.SaveChangesAsync();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         [HttpGet("nodes/{level}")]
         public async Task<IActionResult> GetLevels(int level)
@@ -83,6 +83,5 @@ namespace WebApi.Controllers
 
             return details == null ? NotFound() : Ok(details);
         }
-
     }
 }

@@ -18,7 +18,7 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        public async Task<IEnumerable<SalesRep>> get()
+        public async Task<IEnumerable<SalesRep>> Get()
         {
             return await _context.SalesReps.ToListAsync();
         }

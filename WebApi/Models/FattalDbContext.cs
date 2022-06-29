@@ -23,6 +23,13 @@ namespace WebApi.Models
                 u.CompNo
             });
 
+            modelBuilder.Entity<VariableDetails>().HasKey(u => new
+            {
+                u.CompNo,
+                u.VariableCode,
+                u.SubVariableCode,
+            });
+
             modelBuilder.Entity<VariableHeaders>().HasKey(u => new
             {
                 u.CompNo,
